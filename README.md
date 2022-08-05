@@ -1,8 +1,7 @@
 # theStore
 
-### photos 
 
-### photos
+### Routes
    VERB 		 | 		  PATH 		 |  	 DESCRIPTION
 ------------ | ------------- | -------------------
 GET | /products/ | index of products to buy |
