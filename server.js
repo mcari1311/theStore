@@ -4,7 +4,10 @@ require('dotenv').config()
 const app = express()
 const mongoose = require('mongoose')
 const methodOverride = require('method-override');
+const productData = require('./utilities/productsData')
 const port = process.env.PORT || 3003
+//import models
+const Product = require('./models/products')
 
 //mongoose connect
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -25,13 +28,26 @@ app.use(express.urlencoded({extended:false}));
 //method override
 app.use(methodOverride('_method'));
 
-//import models
-const Product = require('./models/products')
 
+
+// //seed route 
+// app.get('/product/seed', (req,res) => {
+//     //comment the line below if you don't want to delete your whole entire collection
+//     // Product.deleteMany({})
+//     //create a list of pokemon into the database
+//     Product.create(productData)
+// })
 
 //routes
 app.get('/', (req, res) => {
     res.send('hello')
+})
+app.get('/product', (req, res) => {
+    Product.find({}, (error, allProduct) => {
+        res.render('Index', {
+            product: allProduct
+        })
+    })
 })
 
 
