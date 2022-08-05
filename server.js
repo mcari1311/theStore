@@ -25,8 +25,11 @@ app.use(express.urlencoded({extended:false}));
 //method override
 app.use(methodOverride('_method'));
 
+//import models
+const Product = require('./models/products')
 
-//test
+
+//routes
 app.get('/', (req, res) => {
     res.send('hello')
 })
